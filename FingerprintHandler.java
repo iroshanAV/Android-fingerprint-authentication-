@@ -13,7 +13,6 @@ import android.widget.Toast;
  * Created by Chinthana-PC on 1/7/2017.
  */
 public class FingerprintHandler extends FingerprintManager.AuthenticationCallback {
-
     private Context context;
 
     public FingerprintHandler(Context context) {
@@ -25,7 +24,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         if(ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED)
             return;
         fingerprintManager.authenticate(cryptoObject,cenCancellationSignal,0,this,null);
-
     }
 
     @Override
@@ -38,6 +36,5 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
         context.startActivity(new Intent(context,HomeActivity.class));
-
     }
 }
