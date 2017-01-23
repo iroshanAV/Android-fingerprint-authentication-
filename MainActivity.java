@@ -34,19 +34,14 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_NAME = "EDMTDev";
     private Cipher cipher;
     private TextView textView;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         KeyguardManager keyguardManager = (KeyguardManager) getSystemService(KEYGUARD_SERVICE);
         FingerprintManager fingerprintManager = (FingerprintManager) getSystemService(FINGERPRINT_SERVICE);
-
-
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED) {
-
             return;
         }
         if (!fingerprintManager.isHardwareDetected())
@@ -55,16 +50,14 @@ public class MainActivity extends AppCompatActivity {
             if (!fingerprintManager.hasEnrolledFingerprints())
                 Toast.makeText(this, "Register at least one fingerprint in Settings", Toast.LENGTH_SHORT).show();
             else {
-                if (!keyguardManager.isKeyguardSecure())
-                    Toast.makeText(this, "Lock screen security not enabled in Settings", Toast.LENGTH_SHORT).show();
+                if (!keyguardManager.isKeyguardSecure()){
+                    Toast.makeText(this, "Lock screen security not enabled in Settings", Toast.LENGTH_SHORT).show();}
                 else
-                    genKey();
-
+                {genKey();}
                 if (cipherInit()) {
                     FingerprintManager.CryptoObject cryptoObject = new FingerprintManager.CryptoObject(cipher);
                     FingerprintHandler helper = new FingerprintHandler(this);
                     helper.startAuthentication(fingerprintManager, cryptoObject);
-
                 }
             }
         }
@@ -78,8 +71,6 @@ public class MainActivity extends AppCompatActivity {
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         } catch (NoSuchPaddingException e) {
-
-
         }
 
         try {
@@ -112,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             e1.printStackTrace();
             return false;
         }
-
     }
 
     private void genKey() {
@@ -151,8 +141,6 @@ public class MainActivity extends AppCompatActivity {
         {
             e.printStackTrace();
         }
-
-
     }
 
 }
