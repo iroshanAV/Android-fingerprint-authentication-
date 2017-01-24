@@ -25,7 +25,6 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
         if(ActivityCompat.checkSelfPermission(context, Manifest.permission.USE_FINGERPRINT) != PackageManager.PERMISSION_GRANTED)
             return;
         fingerprintManager.authenticate(cryptoObject,cenCancellationSignal,0,this,null);
-
     }
 
     @Override
@@ -38,6 +37,5 @@ public class FingerprintHandler extends FingerprintManager.AuthenticationCallbac
     public void onAuthenticationSucceeded(FingerprintManager.AuthenticationResult result) {
         super.onAuthenticationSucceeded(result);
         context.startActivity(new Intent(context,HomeActivity.class));
-
     }
 }
